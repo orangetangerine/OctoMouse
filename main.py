@@ -138,7 +138,7 @@ def _cmap_from_image_path(img_path):
 def _colourised(img):
     """ maps values in greyscale image to colours """
     arr = np.array(img)
-    rgba_img = _cmap_from_image_path('/Users/orange/PycharmProjects/keyboardheatmap.py/default.png')(arr, bytes=True)
+    rgba_img = _cmap_from_image_path('default.png')(arr, bytes=True)
     return Image.fromarray(rgba_img, mode="RGBA")
 
 
@@ -242,10 +242,11 @@ def draw_heat2(width, height, points):
     img_arr[squeeze_img_arr == 0, 3] = 0
     return Image.fromarray(np.uint8(img_arr))
 
-
+# 1. call `plutil -convert xml1 ~/Library/Containers/com.takohi.octomouse/Data/Library/Preferences/com.takohi.octomouse.plist -o 1.xml`, we'll get the statistic
+# 2. call `python3 main.py`, make sure all the image files and `1.xml` is in your working dir.
 if __name__ == '__main__':
     # load keyboard hit file
-    tree = ET.parse('/Users/orange/tmp/1.xml')
+    tree = ET.parse('1.xml')
 
     index = -1
     for k, v in enumerate(tree.getroot()[0]):
